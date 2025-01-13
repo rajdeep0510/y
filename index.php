@@ -1,6 +1,8 @@
 <?php
-include("./models/database.php");
+    include("./models/database.php");
+    session_start();
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -13,8 +15,9 @@ include("./models/database.php");
 
 <body class="bg-gray-700 text-white">
     <?php
-    include './components/navbar.html';
+    include './components/navbar.php';
     ?>
+    <?php if ($_SESSION['is_logged_in'] == true) { ?>
     <form method="POST">
         <div class="flex items-center justify-center">
             <input type="text"
@@ -29,7 +32,10 @@ include("./models/database.php");
             </button>
         </div>
     </form>
+    <?php } ?>
+
     <?php
+    var_dump($_SESSION);
     if (isset($_POST['submit'])) {
         $message = $_POST['message'];
 
@@ -43,7 +49,6 @@ include("./models/database.php");
             }
 
     }
-
     $sql_select = "SELECT * FROM message";
     $result = mysqli_query($connection, $sql_select);
     if (mysqli_num_rows($result) > 0) {
@@ -53,7 +58,6 @@ include("./models/database.php");
     } else {
         echo "No messages";
     }
-
 
     mysqli_close($connection);
     ?>
