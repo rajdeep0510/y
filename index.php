@@ -1,31 +1,28 @@
-<!doctype html>
-<html lang="en">
+<?php
+    var_dump($_SESSION);
+    if (isset($_POST['submit'])) {
+        $message = $_POST['message'];
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+        $sql_insert = "INSERT INTO message ( content ) VALUES ('$message')";
+        
+        try{
+            mysqli_query($connection, $sql_insert);
+           
+            }catch(mysqli_sql_exception){
+                echo "could not sent message";
+            }
 
-<body class="bg-secondary">
-    <form method="post">
-        <div class="mb-3 ms-3 me-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" name="username" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
-        <div class="mb-3 ms-3 me-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="mb-3 ms-3 me-3">
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <?php
-        $username = $_POST['username'];
-        echo $username;
-    ?>
-</body>
+    }
+    $sql_select = "SELECT * FROM message";
+    $result = mysqli_query($connection, $sql_select);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='flex items-center justify-center bg-gray-600 m-2 p-1 rounded'>" . $row['content'] . "</div>";
+        }
+    } else {
+        echo "No messages";
+    }
 
-</html>
+    mysqli_close($connection);
+    require './components/index.view.php';
+?>
