@@ -1,6 +1,6 @@
 <?php  include("./config/config.inc.php"); ?>
 <?php session_start(); ?>
-<?php include '../models/database.php'; ?>
+<?php include './models/database.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +47,7 @@
                 $_SESSION['is_logged_in'] = true;
                 $_SESSION['user_id'] = $row['id'];
 
-                header("Location: ../index.php");
+                header("Location: /php/y/");
                 exit();
             } else {
                 echo "Invalid password";

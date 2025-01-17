@@ -1,5 +1,8 @@
-<?php  include("./config/config.ini.php"); ?>
+<?php  
+  include("./config/config.ini.php"); 
+?>
 <?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +22,11 @@
         <a href="#" class="text-xl font-bold">X Clone</a>
         <!-- Links -->
         <div class="space-x-4">
-          <a href="../index.php" class="hover:underline">Home</a>
+          <a href="/php/y/" class="hover:underline">Home</a>
           <?php if ($_SESSION['is_logged_in'] == true) { ?>
           <a href="./components/logout.php" class="hover:underline">Logout</a>
           <?php } else { ?>
-          <a href="./components/login.php" class="hover:underline">Login</a>
+          <a href="/php/y/login" class="hover:underline">Login</a>
           <?php } ?>
           <a href="#" class="hover:underline">About</a>
           <a href="#" class="hover:underline">Profile</a>
@@ -36,3 +39,4 @@
 </body>
 
 </html>
+
