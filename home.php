@@ -39,13 +39,18 @@
     var_dump($_SESSION);
     if (isset($_POST['submit'])) {
         $message = $_POST['message'];
-
+        $username = "@".$_SESSION['username'];
         $sql_insert = "INSERT INTO messages ( message, username ) VALUES ('$message', '$username')";
         
         try{
-            mysqli_query($connection, $sql_insert);
-            
-            }catch(mysqli_sql_exception){
+            if($username == ''){
+                echo "write a message";
+            }
+            else{
+            mysqli_query($connection, $sql_insert);    
+            }
+        }
+        catch(mysqli_sql_exception){
                 echo "could not sent message";
             }
 

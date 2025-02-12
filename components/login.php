@@ -46,7 +46,7 @@
                 echo "Logged in";
                 $_SESSION['is_logged_in'] = true;
                 $_SESSION['user_id'] = $row['id'];
-
+                $_SESSION['username'] = $username;
                 header("Location: /php/y/");
                 exit();
             } else {
