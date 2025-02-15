@@ -47,7 +47,7 @@
                 echo "write a message";
             }
             else{
-            mysqli_query($connection, $sql_insert);    
+            mysqli_query($connection, $sql_insert);
             }
         }
         catch(mysqli_sql_exception){
